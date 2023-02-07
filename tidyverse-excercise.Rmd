@@ -100,7 +100,8 @@ df_covid <- filter(df_covid, !is.na(Recip_State))
 Find the latest date of the data, then subset the data with only the newest date for each country
 
 ```{r}
-
+subset_covid <- df_covid %>%
+  filter(Date == max(Date)) 
 ```
 
 ### Max percentatge, min percentage
@@ -108,10 +109,9 @@ Find the latest date of the data, then subset the data with only the newest date
 Which county has the highest vaccination rate? What is the number?
 
 ```{r}
-
+subset_covid %>%
+  filter(Completeness_pct == max(Completeness_pct, na.rm = T))
 ```
-
-
 ## Data wrangling, Part 2
 
 ### Proportion of county with more than 50 percent vaccination rate (latest)
