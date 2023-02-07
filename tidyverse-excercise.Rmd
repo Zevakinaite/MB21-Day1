@@ -49,13 +49,14 @@ Now the data is in R workspace. Do the following
 ### Count the number of variabes and rows
 
 ```{r}
-
+nrow(df_covid) #number of rows
+ncol(df_covid) #number of variables
 ```
 
 ### Print out the first 6 rows of the data.frame
 
 ```{r}
-
+head(df_covid, 6)
 
 ```
 
@@ -67,7 +68,10 @@ Now the data is in R workspace. Do the following
 - Obviously there are data points not from states. What are they?
 
 ```{r}
-
+df_covid %>%
+  group_by(Recip_State) %>%
+  summarise(count = n())
+#exists 60 states and 1 with not awailable (NA data)
 ```
 
 
