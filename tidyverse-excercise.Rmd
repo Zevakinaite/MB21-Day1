@@ -68,9 +68,8 @@ head(df_covid, 6)
 - Obviously there are data points not from states. What are they?
 
 ```{r}
-df_covid %>%
-  group_by(Recip_State) %>%
-  summarise(count = n())
+n_distinct(df_covid$Recip_State)
+n_distinct(df_covid$Recip_State==NA)
 #exists 60 states and 1 with not awailable (NA data)
 ```
 
@@ -91,7 +90,7 @@ df_covid$Date <- as.Date(df_covid$Date, "%m/%d/%Y")
 First remove the non-country entries
 
 ```{r}
-df_covid <- filter(df_covid, !is.na(Recip_State))
+df_covid <- filter(df_covid, Recip_County !="Unknown County")
 ```
 
 
@@ -101,6 +100,7 @@ Find the latest date of the data, then subset the data with only the newest date
 
 ```{r}
 subset_covid <- df_covid %>%
+  group_by(Recip_County) %>%
   filter(Date == max(Date)) 
 ```
 
