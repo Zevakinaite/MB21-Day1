@@ -82,7 +82,8 @@ df_covid %>%
 The variable Date is character. Convert it to a Date variable.
 
 ```{r}
-
+typeof(df_covid$Date)
+df_covid$Date <- as.Date(df_covid$Date, "%m/%d/%Y")
 ```
 
 ### Erase unnecessary rows
@@ -90,7 +91,7 @@ The variable Date is character. Convert it to a Date variable.
 First remove the non-country entries
 
 ```{r}
-
+df_covid <- filter(df_covid, !is.na(Recip_State))
 ```
 
 
